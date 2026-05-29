@@ -1,0 +1,45 @@
+project:
+  type: manuscript
+  render: [manuscript.qmd]
+
+manuscript:
+  article: manuscript.qmd
+
+format:
+  html:
+    theme: 
+      light:
+        cosmo
+      dark:
+        [cosmo, theme_dark.css]
+    embed-resources: false
+    filters: 
+      - pdf-to-webp.lua
+    reference-location: margin
+    code-fold: true
+    code-summary: "Source code"
+    fig-width: 6
+    fig-height: 3
+    notebook-links: false
+  pdf:
+    documentclass: article
+    colorlinks: true
+    notebook-links: false
+    linkcolor: blue
+    fig-width: 6
+    fig-height: 3
+    link-citations: true
+    reference-section-title: "References"
+    pdf-engine: xelatex
+    echo: false
+    include-in-header:
+      text: |
+        \usepackage[scaled=.95]{cabin} 
+        \usepackage[varqu,varl]{inconsolata} 
+
+website:
+  sidebar:
+    style: "docked"
+    search: true
+
+number-depth: 3

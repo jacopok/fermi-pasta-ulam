@@ -1,0 +1,11 @@
+
+bibliography: bibliography.bib
+
+execute:
+  cache: true
+  warning: false
+
+csl: bibstyle.csl
+
+author: Firstname Lastname
+date: 2015-09-14

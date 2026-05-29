@@ -1,0 +1,30 @@
+project:
+  title: presentation
+  type: manuscript
+  render: [presentation.qmd]
+
+manuscript:
+  article: presentation.qmd
+
+
+format:
+  revealjs: 
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    theme: dark
+  beamer:
+    colorlinks: true
+    slide-number: true
+    theme: default
+    linkcolor: blue
+    fig-width: 6
+    fig-height: 3
+    link-citations: true
+    pdf-engine: xelatex
+    echo: false
+    include-in-header:
+      text: |
+        \usepackage[scaled=.95]{cabin} 
+        \usepackage[varqu,varl]{inconsolata} 
