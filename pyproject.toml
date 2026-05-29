@@ -13,6 +13,7 @@ dependencies = [
     "numpy>=1.26.4",
     "quarto-cli>=1.5.57",
     "project-scripts",
+    "scipy>=1.17.1",
 ]
 
 [tool.uv.workspace]
