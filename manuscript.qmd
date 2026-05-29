@@ -1,14 +1,124 @@
-
-# Project
-
-This is some example text.
-
+# The Fermi-Pasta-Ulam-Tsingou problem
 
 ```{python}
-from IPython.display import Markdown
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import animation
+from IPython.display import HTML
+from scipy.integrate import solve_ivp
 
-x = 1
-
-Markdown(f'This is some Markdown rendered text with a variable ${x=}$.')
 ```
 
+Consider a horizontal chain of masses connected by springs. Each of them can oscillate in the vertical direction. We will use "horizontal" and "vertical" for clarity, but we are neglecting gravity here.
+
+Hooke's law tells us that force is related to displacement through $\vec{F} = -k \vec{x}$; for the $i$-th mass, the horizontal component of this force will always be balanced (since the horizontal distance to its neighboring masses is fixed).
+
+We can parameterize these masses through their vertical coordinates; the $i$-th mass will be subject to a force
+
+$$ F_i = -k (x_{i} - x_{i-i}) - k (x_{i} - x_{i+1})
+= k ( x_{i-1} + x_{i+1} - 2 x_i )
+$$
+
+meaning that its acceleration, through $F = m a$, will be
+
+$$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )
+$$
+
+```{python}
+
+m = 1.
+k = 1.
+J = 64
+
+x = np.linspace(0,1,J)
+
+def fun(t, yyp):
+    y = yyp[:J]
+    yp = yyp[J:]
+
+    acc = y*0.
+    acc[1:-1] = k/m * (y[2:]-2*y[1:-1]+y[:-2])
+    
+    return np.concatenate((yp, acc))
+
+# simulate for one full cycle of the fundamental
+tmax = 2 * np.pi / (2 * k/m*np.sin(np.pi / 2 / (J+1)))
+
+n_frames = 200
+
+result_fundamental = solve_ivp(
+    fun, 
+    t_span=(0, tmax), 
+    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
+    y0=np.concatenate((np.sin(np.pi*x), np.zeros_like(x))), 
+    method='RK45'
+)
+result_harmonic = solve_ivp(
+    fun, 
+    t_span=(0, tmax), 
+    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
+    y0=np.concatenate((np.sin(2*np.pi*x), np.zeros_like(x))), 
+    method='RK45'
+)
+
+rng = np.random.default_rng(seed=1)
+
+result_random = solve_ivp(
+    fun, 
+    t_span=(0, tmax), 
+    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
+    y0=np.concatenate((
+        [0],
+        np.convolve(
+            rng.normal(scale=0.1, size=J-2),
+            np.ones(5), 
+            mode='same'
+        ), 
+        [0],
+        np.zeros_like(x))), 
+    method='RK45'
+)
+```
+
+```{python}
+
+results = {
+    'fundamental': result_fundamental,
+    'harmonic': result_harmonic,
+    'random': result_random,
+}
+colors = {
+    'fundamental': '#1E88E5',
+    'harmonic': '#D81B60',
+    'random': '#FFC107'
+}
+
+def plot_oscillation(results):
+    fig, ax = plt.subplots(1, 1, figsize=(6,4))
+
+    lines = {}
+    for name, res in results.items():
+        line, = ax.plot([],[],colors[name],ms=5)
+        lines[name] = line
+
+    ax.set_xlim(0, 1)
+    ax.set_ylim(-1.1, 1.1)
+
+    def plot_frame(i):
+        for name in results:
+            lines[name].set_data(x, results[name].y[:J, i])
+
+        return iter(lines.values())
+
+    anim = animation.FuncAnimation(
+        fig, 
+        plot_frame, 
+        frames=n_frames, 
+        interval=1000/60,
+        blit=True,
+    )
+    anim.save('fput.gif')
+    return anim.to_jshtml()
+
+HTML(plot_oscillation(results))
+```
