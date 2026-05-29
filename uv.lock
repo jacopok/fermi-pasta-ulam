@@ -1726,6 +1726,7 @@ dependencies = [
     { name = "numpy" },
     { name = "project-scripts" },
     { name = "quarto-cli" },
+    { name = "scipy" },
 ]
 
 [package.metadata]
@@ -1738,6 +1739,7 @@ requires-dist = [
     { name = "numpy", specifier = ">=1.26.4" },
     { name = "project-scripts", editable = "project_scripts" },
     { name = "quarto-cli", specifier = ">=1.5.57" },
+    { name = "scipy", specifier = ">=1.17.1" },
 ]
 
 [[package]]
