@@ -1,5 +1,34 @@
 # The Fermi-Pasta-Ulam-Tsingou problem
 
+```{python}
+#| echo: false
+
+import matplotlib.pyplot as plt
+from project_scripts.simulations import non_linear_system
+from pathlib import Path
+import numpy as np
+
+fname = Path('alpha_5.mp4')
+
+if not fname.exists():
+
+    non_linear_system(
+            np.sin(np.pi*np.linspace(0, 1, 21)),
+            periods=10,
+            alpha=1,
+            video_path=fname,
+            label=', $\\alpha=5$',
+        )
+    plt.close()
+```
+
+::: {.content-visible when-format="html"}
+
+![Animation of the nonlinear oscillating string we will model.](alpha_5.mp4)
+
+:::
+
+
 Consider a horizontal chain of masses connected by springs. Each of them can oscillate in the vertical direction. We will use "horizontal" and "vertical" for clarity, but we are neglecting gravity here.
 
 Hooke's law tells us that force is related to displacement through $\vec{F} = -k \vec{x}$; for the $i$-th mass, the horizontal component of this force will always be balanced (since the horizontal distance to its neighboring masses is fixed).
@@ -16,33 +45,6 @@ $$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )\,.
 $$
 
 We consider a system of $N+1$ masses, indexed from $0$ to $N$, such that masses $0$ and $N$ are kept fixed.
-
-```{python}
-#| echo: false
-
-from project_scripts.simulations import non_linear_system
-from pathlib import Path
-import numpy as np
-
-fname = Path('alpha_5.mp4')
-
-if not fname.exists():
-
-    non_linear_system(
-            np.sin(np.pi*np.linspace(0, 1, 21)),
-            periods=2,
-            alpha=1,
-            video_path=fname,
-            label=', $\\alpha=5$',
-        )
-```
-
-::: {.content-visible when-format="html"}
-
-![Animation](alpha_5.mp4)
-
-:::
-
 
 We expect wave-like solutions by the look of the equation. 
 Since we need to fix the boundaries to 0, a sensible family to consider is 
