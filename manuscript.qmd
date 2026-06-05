@@ -59,7 +59,18 @@ meaning that its acceleration, through $F = m a$, will be
 $$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )\,.
 $$
 
+From here onward, we will set $k/m = 1$ and forget about these constants. Equivalently, we can work with a rescaled temporal coordinate
+
+$$ \tilde{t} = t \sqrt{ \frac{m}{k}}\,.
+$$
+
+::: {#nte-title .callout-note collapse="true"}
+##### Mass indices
 We consider a system of $N+1$ masses, indexed from $0$ to $N$, such that masses $0$ and $N$ are kept fixed.
+
+This means we have $N$ springs, and the factor $N$ will be used often. Note that other references may say that $N$ is the number of masses.
+
+:::
 
 We expect wave-like solutions. Since we need to fix the boundaries to 0, a sensible ansatz is
 
