@@ -428,11 +428,12 @@ H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x\,,
 <li><span class="math inline">\(2\)</span> along the central diagonal, except for <span class="math inline">\(V_{00} = V_{NN} = 1\)</span>;</li>
 <li><span class="math inline">\(-1\)</span> on the two diagonals near the central one.</li>
 </ul>
-<div id="9fe5ad45" class="cell" data-execution_count="4">
+<div id="88e5fd5a" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="manuscript_files/figure-html/cell-5-output-1.png" width="348" height="283" class="figure-img"></a></p>
+<p><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Matrix entries for potential V of the problem."><img src="manuscript_files/figure-html/cell-5-output-1.png" width="348" height="283" alt="Matrix entries for potential V of the problem." class="figure-img"></a></p>
+<figcaption>Matrix entries for potential <em>V</em> of the problem.</figcaption>
 </figure>
 </div>
 </div>
@@ -444,20 +445,22 @@ O_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
 <p>A note of caution: the statement about invertibility is only true when restricting the matrix to its central submatrix, with indices <span class="math inline">\(1 \leq n, m &lt; N\)</span>, since the outer “cornice” of the matrix is identically zero, meaning that its rank is actually <span class="math inline">\(N-1\)</span>.</p>
 <p>This transformation is called the <strong>Discrete Sine Transform</strong>, it is a real-valued variant of the Fourier transform.</p>
 <p>We can show that <span class="math inline">\(O^{T} V O = \Omega\)</span>, where <span class="math inline">\(\Omega\)</span> is a diagonal matrix.</p>
-<div id="7c3aae50" class="cell" data-execution_count="5">
+<div id="194c6e7d" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" class="figure-img"></a></p>
+<p><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Matrix entries for the Discrete Sine Transform U."><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" alt="Matrix entries for the Discrete Sine Transform U." class="figure-img"></a></p>
+<figcaption>Matrix entries for the Discrete Sine Transform <em>U</em>.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="45cdd136" class="cell" data-execution_count="6">
+<div id="903cfa8c" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="286" class="figure-img"></a></p>
+<p><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Matrix entries for the diagonalized potential."><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="286" alt="Matrix entries for the diagonalized potential." class="figure-img"></a></p>
+<figcaption>Matrix entries for the diagonalized potential.</figcaption>
 </figure>
 </div>
 </div>
@@ -484,11 +487,12 @@ H = \frac{1}{2} \sum_{n=1}^{N-1} \left[ \dot{Q}_{n}^{2} +\omega _{n}^{2}Q_{n}^{2
 <p><span class="math display">\[
 H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \left[  (x_{i} - x_{i-1})^{2} + \frac{\alpha}{3}(x_{i}-x_{i-1})^{3} + \frac{\beta}{4} (x_{i}-x_{i-1})^{4}  \right]\,.
 \]</span></p>
-<div id="70bec17c" class="cell" data-execution_count="7">
+<div id="aa74fa43" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="manuscript_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="manuscript_files/figure-html/cell-8-output-1.png" width="502" height="284" class="figure-img"></a></p>
+<p><a href="manuscript_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Nonlinear spring response."><img src="manuscript_files/figure-html/cell-8-output-1.png" width="502" height="284" alt="Nonlinear spring response." class="figure-img"></a></p>
+<figcaption>Nonlinear spring response.</figcaption>
 </figure>
 </div>
 </div>
@@ -499,7 +503,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
 <p>Now, the coordinates <span class="math inline">\(Q\)</span> are not of particular help in <em>solving</em> the problem: the Hamiltonian written in terms of them remains heavily coupled; for example, including only the <span class="math inline">\(\alpha\)</span> contribution, we have</p>
 <p><span class="math display">\[
 H = \frac{1}{2} \sum_{n=1}^{N-1} \left[\dot{Q}_{n}^{2} + \omega_n^2 Q_n^2\right] + \frac{\alpha}{3}
-\sum{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
+\sum_{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
 \]</span></p>
 <p>for some coeffficients <span class="math inline">\(c_{klm}\)</span> which we do not need to actually compute. This is not any easier to solve than the version written in terms of <span class="math inline">\(x\)</span>; in fact, solving the equation in <span class="math inline">\(x\)</span> is preferrable.</p>
 <p>Nevertheless, understanding the linear problem is helpful when looking at the evolution of the nonlinear one. We can still perform the transformation <span class="math inline">\(Q (t) = Ox(t)\)</span>, and compute the energy in each eigenmode of the linear problem, <span class="math inline">\(E_n(t)\)</span>. We do not expect these to be constant as a function of time. The physicists in the 1953 paper expected to observe some kind of thermalization, <em>i.e.</em> the energies contained in each mode would approach a stable configuration with each mode having roughly equal energy.</p>

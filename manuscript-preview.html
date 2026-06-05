@@ -398,10 +398,10 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">        
 
-     <div id="094f3d9e" class="cell markdown">
+     <div id="d8abf26e" class="cell markdown">
 
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="082cb14f" class="cell" data-execution_count="1">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="ac522ee7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -423,7 +423,7 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="86960696" class="cell markdown">
+<div id="119d8076" class="cell markdown">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="alpha_5.mp4"></video></div>
 <p>Animation of the nonlinear oscillating string we will model.</p>
 <section id="motivation-and-history" class="level2">
@@ -532,7 +532,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} -
 </section>
 </section>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="87c419fd" class="cell" data-execution_count="2">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="f3270af5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -561,7 +561,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} -
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="26376d0a" class="cell" data-execution_count="3">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="90ef9d2d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -582,7 +582,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} -
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>V[i[:<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, i[:<span class="op">-</span><span class="dv">1</span>]] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="ebfedd6d" class="cell markdown">
+<div id="57790101" class="cell markdown">
 <p>We can write the problem in matrix terms: the Hamiltonian will be <span class="math display">\[
 H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x\,,
 \]</span></p>
@@ -592,7 +592,7 @@ H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x\,,
 <li><span class="math inline">\(-1\)</span> on the two diagonals near the central one.</li>
 </ul>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="9fe5ad45" class="cell" data-execution_count="4">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="88e5fd5a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
@@ -607,14 +607,15 @@ H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x\,,
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>cbar.set_ticks(np.arange(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="manuscript_files/figure-html/cell-5-output-1.png" width="348" height="283" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Matrix entries for potential V of the problem."><img src="manuscript_files/figure-html/cell-5-output-1.png" width="348" height="283" alt="Matrix entries for potential V of the problem." class="figure-img"></a></p>
+<figcaption>Matrix entries for potential <em>V</em> of the problem.</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="51701791" class="cell markdown">
+<div id="ca13f58a" class="cell markdown">
 <p>We can diagonalize this potential making use of the matrix <span class="math inline">\(O\)</span>, whose entries are given by <span class="math display">\[
 O_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
 \]</span></p>
@@ -623,22 +624,23 @@ O_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
 <p>This transformation is called the <strong>Discrete Sine Transform</strong>, it is a real-valued variant of the Fourier transform.</p>
 <p>We can show that <span class="math inline">\(O^{T} V O = \Omega\)</span>, where <span class="math inline">\(\Omega\)</span> is a diagonal matrix.</p>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="7c3aae50" class="cell" data-execution_count="5">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="194c6e7d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U, cmap<span class="op">=</span><span class="st">'seismic'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fourier matrix $U$'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'DST matrix $U$'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Matrix entries for the Discrete Sine Transform U."><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" alt="Matrix entries for the Discrete Sine Transform U." class="figure-img"></a></p>
+<figcaption>Matrix entries for the Discrete Sine Transform <em>U</em>.</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="45cdd136" class="cell" data-execution_count="6">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="903cfa8c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U<span class="op">@</span>V<span class="op">@</span>U, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
@@ -646,14 +648,15 @@ O_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="286" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Matrix entries for the diagonalized potential."><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="286" alt="Matrix entries for the diagonalized potential." class="figure-img"></a></p>
+<figcaption>Matrix entries for the diagonalized potential.</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="01d54328" class="cell markdown">
+<div id="2c2b138d" class="cell markdown">
 <p>Specifically, one finds that the entries on the diagonal of <span class="math inline">\(\Omega\)</span> are exactly the square angular frequencies from before:</p>
 <p><span class="math display">\[ \Omega_{nn} = \omega_n^2 = 4 \sin^2 \left( \frac{\pi n}{ 2N} \right) \,.
 \]</span></p>
@@ -676,7 +679,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
 \]</span></p>
 </section>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="70bec17c" class="cell" data-execution_count="7">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="aa74fa43" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, num<span class="op">=</span><span class="dv">1000</span>)</span>
@@ -692,21 +695,22 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.grid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="manuscript_files/figure-html/cell-8-output-1.png" width="502" height="284" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Nonlinear spring response."><img src="manuscript_files/figure-html/cell-8-output-1.png" width="502" height="284" alt="Nonlinear spring response." class="figure-img"></a></p>
+<figcaption>Nonlinear spring response.</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="cac1d15c" class="cell markdown">
+<div id="e2b80903" class="cell markdown">
 <p>The equations of motion now become <span class="math display">\[
 \ddot{x}_{i} = x_{i-1} +x_{i+1} - 2 x_{i} + \alpha \left[ (x_{i+1}-x_{i})^{2} - (x_{i}-x_{i-1})^{2} \right] + \beta \left[ (x_{i+1}-x_{i})^{3} - (x_{i}-x_{i-1})^{3} \right] \,.
 \]</span></p>
 <p>Now, the coordinates <span class="math inline">\(Q\)</span> are not of particular help in <em>solving</em> the problem: the Hamiltonian written in terms of them remains heavily coupled; for example, including only the <span class="math inline">\(\alpha\)</span> contribution, we have</p>
 <p><span class="math display">\[
 H = \frac{1}{2} \sum_{n=1}^{N-1} \left[\dot{Q}_{n}^{2} + \omega_n^2 Q_n^2\right] + \frac{\alpha}{3}
-\sum{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
+\sum_{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
 \]</span></p>
 <p>for some coeffficients <span class="math inline">\(c_{klm}\)</span> which we do not need to actually compute. This is not any easier to solve than the version written in terms of <span class="math inline">\(x\)</span>; in fact, solving the equation in <span class="math inline">\(x\)</span> is preferrable.</p>
 <p>Nevertheless, understanding the linear problem is helpful when looking at the evolution of the nonlinear one. We can still perform the transformation <span class="math inline">\(Q (t) = Ox(t)\)</span>, and compute the energy in each eigenmode of the linear problem, <span class="math inline">\(E_n(t)\)</span>. We do not expect these to be constant as a function of time. The physicists in the 1953 paper expected to observe some kind of thermalization, <em>i.e.</em> the energies contained in each mode would approach a stable configuration with each mode having roughly equal energy.</p>
