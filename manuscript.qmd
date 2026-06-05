@@ -136,7 +136,7 @@ fname = Path('gaussian_y0.mp4')
 if not fname.exists():
     y0 = np.concatenate((
         [0],
-        stats.norm.pdf(np.linspace(-3, 2, num=2**6-1)),
+        stats.norm.pdf(np.linspace(-3, 2, num=2**5-1)),
         [0],
     ))
 
