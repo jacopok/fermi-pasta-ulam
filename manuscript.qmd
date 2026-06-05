@@ -40,7 +40,9 @@ From the evolution of a seemingly simple setup, a chain of oscillating masses co
 This problem was studied in a 1953 paper, authored by Enrico Fermi, John Pasta and Stanislaw Ulam. 
 The paper included numerical simulations, performed by Mary Tsingou who, instead of being credited as an author, was simply [mentioned in a footnote](https://web.archive.org/web/20240929141604/https://discover.lanl.gov/publications/national-security-science/2020-winter/we-thank-miss-mary-tsingou/).
 
-## Linear problem description
+## Linear problem 
+
+### Description and ODE approach
 
 Consider a horizontal chain of masses connected by springs. Each of them can oscillate in the vertical direction. We will use "horizontal" and "vertical" for clarity, but we are neglecting gravity here.
 
@@ -117,7 +119,7 @@ We can interpret this as a matrix equation: $\sum_{n=0}^{N} U_{in}f_{n}=0$, wher
 $U_{in} = \sin(\pi i n / N)$ while $f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)$.
 The matrix $U$ is invertible (check!), therefore the only solution to this system of equations is $f_{n}=0$ for all $n$.
 
-## Hamiltonian and matrix approach
+### Hamiltonian and matrix approach
 
 An alternative approach is the Hamiltonian one. 
 We can write down the Hamiltonian of the problem in terms of the momenta $p_{i} = \dot{x}_{i}$ and coordinates $q_{i} = x_{i}$:
@@ -149,7 +151,7 @@ fname = Path('gaussian_y0.mp4')
 if not fname.exists():
     y0 = np.concatenate((
         [0],
-        stats.norm.pdf(np.linspace(-3, 2, num=2**5-1)),
+        stats.norm.pdf(np.linspace(-3, 2, num=2**4-1)),
         [0],
     ))
 
