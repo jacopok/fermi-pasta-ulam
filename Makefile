@@ -1,8 +1,8 @@
 showm:
-	uv run quarto preview --profile manuscript
+	uv run quarto preview .  --profile manuscript
 showp:
-	uv run quarto preview --profile presentation
+	uv run quarto preview . --profile presentation
 presentation:
-	uv run quarto render --profile presentation --to revealjs
+	uv run quarto render . --profile presentation --to revealjs
 manuscript:
-	uv run quarto render --profile manuscript
+	uv run quarto render . --profile manuscript

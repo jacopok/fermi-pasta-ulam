@@ -59,10 +59,15 @@ meaning that its acceleration, through $F = m a$, will be
 $$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )\,.
 $$
 
+::: {#nte-title .callout-note collapse="true"}
+##### Physical constants
+
 From here onward, we will set $k/m = 1$ and forget about these constants. Equivalently, we can work with a rescaled temporal coordinate
 
 $$ \tilde{t} = t \sqrt{ \frac{m}{k}}\,.
 $$
+
+:::
 
 ::: {#nte-title .callout-note collapse="true"}
 ##### Mass indices
@@ -126,7 +131,7 @@ $$ \sum_{n=1}^{N-1} \sin\left( \frac{\pi i n}{N}\right) \left[ \ddot{Q}_n (t) + 
 $$
 
 This should hold for all $i = 0\dots N$ (for  $i=0$ and $i=N$ those equations are trivial since we always have $x_i=x_N=0$). 
-We can interpret this as a matrix equation: $\sum_{n=0}^{N} U_{in}f_{n}=0$, where
+We can interpret this as a matrix equation: $\sum_{n=1}^{N-1} U_{in}f_{n}=0$, where
 $U_{in} = \sin(\pi i n / N)$ while $f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)$.
 The matrix $U$ is invertible (check!), therefore the only solution to this system of equations is $f_{n}=0$ for all $n$.
 
