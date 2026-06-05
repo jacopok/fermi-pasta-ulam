@@ -1,14 +1,5 @@
 # The Fermi-Pasta-Ulam-Tsingou problem
 
-```{python}
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib import animation
-from IPython.display import HTML
-from scipy.integrate import solve_ivp
-
-```
-
 Consider a horizontal chain of masses connected by springs. Each of them can oscillate in the vertical direction. We will use "horizontal" and "vertical" for clarity, but we are neglecting gravity here.
 
 Hooke's law tells us that force is related to displacement through $\vec{F} = -k \vec{x}$; for the $i$-th mass, the horizontal component of this force will always be balanced (since the horizontal distance to its neighboring masses is fixed).
@@ -21,104 +12,139 @@ $$
 
 meaning that its acceleration, through $F = m a$, will be
 
-$$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )
+$$ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )\,.
 $$
 
-```{python}
-
-m = 1.
-k = 1.
-J = 64
-
-x = np.linspace(0,1,J)
-
-def fun(t, yyp):
-    y = yyp[:J]
-    yp = yyp[J:]
-
-    acc = y*0.
-    acc[1:-1] = k/m * (y[2:]-2*y[1:-1]+y[:-2])
-    
-    return np.concatenate((yp, acc))
-
-# simulate for one full cycle of the fundamental
-tmax = 2 * np.pi / (2 * k/m*np.sin(np.pi / 2 / (J+1)))
-
-n_frames = 200
-
-result_fundamental = solve_ivp(
-    fun, 
-    t_span=(0, tmax), 
-    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
-    y0=np.concatenate((np.sin(np.pi*x), np.zeros_like(x))), 
-    method='RK45'
-)
-result_harmonic = solve_ivp(
-    fun, 
-    t_span=(0, tmax), 
-    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
-    y0=np.concatenate((np.sin(2*np.pi*x), np.zeros_like(x))), 
-    method='RK45'
-)
-
-rng = np.random.default_rng(seed=1)
-
-result_random = solve_ivp(
-    fun, 
-    t_span=(0, tmax), 
-    t_eval=np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
-    y0=np.concatenate((
-        [0],
-        np.convolve(
-            rng.normal(scale=0.1, size=J-2),
-            np.ones(5), 
-            mode='same'
-        ), 
-        [0],
-        np.zeros_like(x))), 
-    method='RK45'
-)
-```
+We consider a system of $N+1$ masses, indexed from $0$ to $N$, such that masses $0$ and $N$ are kept fixed.
 
 ```{python}
+#| echo: false
 
-results = {
-    'fundamental': result_fundamental,
-    'harmonic': result_harmonic,
-    'random': result_random,
-}
-colors = {
-    'fundamental': '#1E88E5',
-    'harmonic': '#D81B60',
-    'random': '#FFC107'
-}
+from project_scripts.simulations import non_linear_system
+from pathlib import Path
+import numpy as np
 
-def plot_oscillation(results):
-    fig, ax = plt.subplots(1, 1, figsize=(6,4))
+fname = Path('alpha_5.mp4')
 
-    lines = {}
-    for name, res in results.items():
-        line, = ax.plot([],[],colors[name],ms=5)
-        lines[name] = line
+if not fname.exists():
 
-    ax.set_xlim(0, 1)
-    ax.set_ylim(-1.1, 1.1)
-
-    def plot_frame(i):
-        for name in results:
-            lines[name].set_data(x, results[name].y[:J, i])
-
-        return iter(lines.values())
-
-    anim = animation.FuncAnimation(
-        fig, 
-        plot_frame, 
-        frames=n_frames, 
-        interval=1000/60,
-        blit=True,
-    )
-    anim.save('fput.gif')
-    return anim.to_jshtml()
-
-HTML(plot_oscillation(results))
+    non_linear_system(
+            np.sin(np.pi*np.linspace(0, 1, 21)),
+            periods=2,
+            alpha=1,
+            video_path=fname,
+            label=', $\\alpha=5$',
+        )
 ```
+
+::: {.content-visible when-format="html"}
+
+![Animation](alpha_5.mp4)
+
+:::
+
+
+We expect wave-like solutions by the look of the equation. 
+Since we need to fix the boundaries to 0, a sensible family to consider is 
+
+$$ x_i^{(n)}(t) = Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
+$$
+
+Are these indeed solutions? Plugging them into our ODE we get
+
+$$ \frac{\text{d}^2}{\text{d}t^2} x_i^{(n)}(t) = \ddot{Q}_n(t) \sin\left( \frac{\pi i n}{N}\right) = (*)\,.
+$$
+
+On the other side, we have 
+
+$$ (*) = Q_n(t) \left[ \sin\left( \frac{\pi (i+1) n}{N}\right) + \sin\left( \frac{\pi (i-1) n}{N}\right) - 2 \sin\left( \frac{\pi i n}{N}\right) \right]\,.
+$$
+
+Let us introduce the notation $s_{x} = \sin ( \pi x / N)$ and $c_{x} = \cos ( \pi x / N)$, which will simplify the next step. 
+We can use the sine addition identity to write
+
+$$ \sin\left( \frac{\pi (i+1) n}{N}\right)
+= s_{in} c_n \pm c_{in} s_n\,.
+$$
+
+Then, the RHS will equal
+
+$$ 
+(*) = 
+Q_n(t) \left[ 
+    s_{in} c_n + c_{in} s_n 
+    +
+    s_{in} c_n - c_{in} s_n 
+    - 2 s_{in}
+ \right] = Q_n(t) s_{in} (2c_n - 2)\,.
+$$
+
+
+and through another trigonometric identity we can get to
+
+$$ 2 c_n - 2 = 2 (\cos \left( \frac{\pi n}{N}\right) - 1) = - 4 \sin^2 \left( \frac{\pi n}{2N}\right)\,.
+$$
+
+Then, if we denote $\omega_n = 2 \sin (\pi n / 2N)$, we get to the expression
+
+
+$$ \sum_{n=1}^{N-1} \ddot{Q}_n (t) \sin\left( \frac{\pi i n}{N}\right) = -\sum_{n=1}^{N-1} \omega_n^2 Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
+$$
+Alternatively, we can write this as 
+
+$$ \sum_{n=1}^{N-1} \left[ \ddot{Q}_n (t) + \omega_n^2 Q_n(t)  \right] \sin\left( \frac{\pi i n}{N}\right) = 0\,.
+$$
+
+This should hold for all $i = 1\dots N-1$. We can interpret this as a matrix equation: $\sum_{n} U_{in}f_{n}=0$, where
+$U_{in} = \sin(\pi i n / N)$ while $f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)$. 
+The matrix $U$ is invertible (check!), therefore the only solution to this system of equations is $f_{n}=0$ for all $n$.
+
+An alternative approach is the Hamiltonian one. 
+We can write down the Hamiltonian of the problem in terms of the momenta $p_{i} = \dot{x}_{i}$ and coordinates $q_{i} = x_{i}$:
+$$
+H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} - x_{i-1})^{2}
+$$
+We recover Hamilton's equations as before: 
+
+$$
+\begin{align}
+-\frac{\partial H}{\partial x_{i}} &= -( x_{i}- x_{i-1} ) - (x_{i}-x_{i+1}) = x_{i-1} +x_{i+1} - 2 x_{i}  \\
+\frac{\partial H}{\partial \dot{x}_{i}} &= \dot{x}_{i}
+\end{align}
+$$
+
+In normal coordinates, the Hamiltonian reads:
+
+$$
+H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1}  \omega _{k}^{2}Q_{k}^{2} = \sum_{k=1}^{N-1} E_{k}
+$$
+
+Each mode is evolving independently! 
+But now, let us add some new bits to the Hamiltonian:
+
+$$
+H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \left[  (x_{i} - x_{i-1})^{2} + \frac{\alpha}{3}(x_{i}-x_{i-1})^{3} + \frac{\beta}{4} (x_{i}-x_{i-1})^{4}  \right]
+$$
+
+The equations of motion now become
+$$
+\ddot{x}_{i} = x_{i-1} +x_{i+1} - 2 x_{i} + \alpha \left[ (x_{i+1}-x_{i})^{2} - (x_{i}-x_{i-1})^{2} \right] + \beta \left[ (x_{i+1}-x_{i})^{3} - (x_{i}-x_{i-1})^{3} \right] 
+$$
+
+Useful resources:
+- https://arxiv.org/pdf/nlin/0501053
+- https://pubs.aip.org/aip/cha/article/15/1/015104/322124/The-Fermi-Pasta-Ulam-problem-Fifty-years-of
+
+
+<!-- ```{python}
+import numpy as np
+
+N = 5
+
+i = np.arange(N+1)
+j = np.arange(N+1)
+
+U = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * j[np.newaxis, :] * np.pi / N)
+
+print(np.round(U@U))
+``` -->
