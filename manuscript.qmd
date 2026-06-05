@@ -37,7 +37,12 @@ if not fname.exists():
         )
 ```
 
+::: {.content-visible when-format="html"}
+
 ![Animation](alpha_5.mp4)
+
+:::
+
 
 We expect wave-like solutions by the look of the equation. 
 Since we need to fix the boundaries to 0, a sensible family to consider is 
