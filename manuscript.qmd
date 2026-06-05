@@ -17,7 +17,27 @@ $$
 
 We consider a system of $N+1$ masses, indexed from $0$ to $N$, such that masses $0$ and $N$ are kept fixed.
 
-![Animation](fput.gif)
+```{python}
+#| echo: false
+
+from project_scripts.simulations import non_linear_system
+from pathlib import Path
+import numpy as np
+
+fname = Path('alpha_5.mp4')
+
+if not fname.exists():
+
+    non_linear_system(
+            np.sin(np.pi*np.linspace(0, 1, 21)),
+            periods=2,
+            alpha=1,
+            video_path=fname,
+            label=', $\\alpha=5$',
+        )
+```
+
+![Animation](alpha_5.mp4)
 
 We expect wave-like solutions by the look of the equation. 
 Since we need to fix the boundaries to 0, a sensible family to consider is 
@@ -62,10 +82,56 @@ $$
 
 Then, if we denote $\omega_n = 2 \sin (\pi n / 2N)$, we get to the expression
 
-$$ \sum_{n=1}^{N-1} \ddot{Q}_n (t) \sin\left( \frac{\pi i n}{N}\right) = - \sum_{n=1}^{N-1} \omega_n^2 Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
+
+$$ \sum_{n=1}^{N-1} \ddot{Q}_n (t) \sin\left( \frac{\pi i n}{N}\right) = -\sum_{n=1}^{N-1} \omega_n^2 Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
+$$
+Alternatively, we can write this as 
+
+$$ \sum_{n=1}^{N-1} \left[ \ddot{Q}_n (t) + \omega_n^2 Q_n(t)  \right] \sin\left( \frac{\pi i n}{N}\right) = 0\,.
 $$
 
-```{python}
+This should hold for all $i = 1\dots N-1$. We can interpret this as a matrix equation: $\sum_{n} U_{in}f_{n}=0$, where
+$U_{in} = \sin(\pi i n / N)$ while $f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)$. 
+The matrix $U$ is invertible (check!), therefore the only solution to this system of equations is $f_{n}=0$ for all $n$.
+
+An alternative approach is the Hamiltonian one. 
+We can write down the Hamiltonian of the problem in terms of the momenta $p_{i} = \dot{x}_{i}$ and coordinates $q_{i} = x_{i}$:
+$$
+H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} - x_{i-1})^{2}
+$$
+We recover Hamilton's equations as before: 
+
+$$
+\begin{align}
+-\frac{\partial H}{\partial x_{i}} &= -( x_{i}- x_{i-1} ) - (x_{i}-x_{i+1}) = x_{i-1} +x_{i+1} - 2 x_{i}  \\
+\frac{\partial H}{\partial \dot{x}_{i}} &= \dot{x}_{i}
+\end{align}
+$$
+
+In normal coordinates, the Hamiltonian reads:
+
+$$
+H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1}  \omega _{k}^{2}Q_{k}^{2} = \sum_{k=1}^{N-1} E_{k}
+$$
+
+Each mode is evolving independently! 
+But now, let us add some new bits to the Hamiltonian:
+
+$$
+H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \left[  (x_{i} - x_{i-1})^{2} + \frac{\alpha}{3}(x_{i}-x_{i-1})^{3} + \frac{\beta}{4} (x_{i}-x_{i-1})^{4}  \right]
+$$
+
+The equations of motion now become
+$$
+\ddot{x}_{i} = x_{i-1} +x_{i+1} - 2 x_{i} + \alpha \left[ (x_{i+1}-x_{i})^{2} - (x_{i}-x_{i-1})^{2} \right] + \beta \left[ (x_{i+1}-x_{i})^{3} - (x_{i}-x_{i-1})^{3} \right] 
+$$
+
+Useful resources:
+- https://arxiv.org/pdf/nlin/0501053
+- https://pubs.aip.org/aip/cha/article/15/1/015104/322124/The-Fermi-Pasta-Ulam-problem-Fifty-years-of
+
+
+<!-- ```{python}
 import numpy as np
 
 N = 5
@@ -76,4 +142,4 @@ j = np.arange(N+1)
 U = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * j[np.newaxis, :] * np.pi / N)
 
 print(np.round(U@U))
-```
+``` -->

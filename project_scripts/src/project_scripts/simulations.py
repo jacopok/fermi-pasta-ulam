@@ -49,17 +49,21 @@ def plot_oscillation_multiple(results, colors, fname):
     )
     anim.save(fname)
 
+def get_fourier_matrix_omegas(N):
+    i = np.arange(N+1)
+    matrix = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * i[np.newaxis, :] * np.pi / N)
+    
+    omegas = 2 * np.sin(np.pi * i / 2 / N)
+    return matrix, omegas
+
 def plot_oscillation_and_energy(result, color, fname, label):
     
     n_frames = len(result.t)
     size = result.y.shape[0] // 2
     grid = np.arange(size)
     
-    i = np.arange(size)
     N = size-1
-    matrix = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * i[np.newaxis, :] * np.pi / N)
-    
-    omegas = 2 * np.sin(np.pi * i / 2 / N)
+    matrix, omegas = get_fourier_matrix_omegas(N)
     t_1 = 2 * np.pi / omegas[1]
 
     def get_energies(yyp):
@@ -82,7 +86,7 @@ def plot_oscillation_and_energy(result, color, fname, label):
 
     ax_string.set_xlim(0, size-1)
     ax_string.set_ylim(-1.1, 1.1)
-    ax_energy.set_xlim(.5, size-.5)
+    ax_energy.set_xlim(.5, size-1.5)
     Ek0, Ep0 = get_energies(result.y[:, 0])
     
     ax_energy.set_ylim(0, sum(Ek0)+sum(Ep0))
@@ -97,6 +101,7 @@ def plot_oscillation_and_energy(result, color, fname, label):
 
         line.set_data(grid, result.y[:size, i])
         Ek, Ep = get_energies(result.y[:, i])
+        
 
         for j, b in enumerate(bars_p):
             b.set_y(0)
@@ -238,7 +243,7 @@ def non_linear_system(
         * np.sin(np.pi / 2 / J)
     ) * periods
 
-    n_frames = frames_per_period * int(periods)
+    n_frames = int(frames_per_period * periods)
     
     solver_kwargs = {
         't_eval':np.linspace(0, tmax*(1-1/n_frames), num=n_frames), 
@@ -260,34 +265,72 @@ if __name__ == '__main__':
     
     # t_rec = recurrence_periods(J, alpha, 1.)
 
-
-    rng = np.random.default_rng(seed=1)
-
-    y_random = np.concatenate((
-        [0],
-        np.convolve(
-            rng.normal(size=2**7-1),
-            stats.norm.pdf(np.linspace(-3, 3, num=20)), 
-            mode='same'
-        ), 
-        [0],
-    ))
-    y_random /= y_random.max()
-    y_random *= 0.8
-
     non_linear_system(
-        y_random,
-        periods=2,
-        alpha=0.,
-        video_path=Path('random_y0.mp4'),
-        label=', random initial conditions',
-        frames_per_period=1000,
-    )
-    
-    non_linear_system(
-        np.sin(np.pi*np.linspace(0, 1, 2**5+1)),
-        periods=10,
+        np.sin(np.pi*np.linspace(0, 1, 21)),
+        periods=5,
         alpha=1,
-        video_path=Path('alpha_1.mp4'),
-        label=', $\\alpha=1$',
+        video_path=Path('alpha_5_quick.mp4'),
+        label=', $\\alpha=5$',
     )
+
+    # non_linear_system(
+    #     (
+    #         np.sin(np.pi * 1 * np.linspace(0, 1, 33))+
+    #         .3 * np.sin(np.pi * 2 * np.linspace(0, 1, 33))+
+    #         .1 * np.sin(np.pi * 5 * np.linspace(0, 1, 33))
+    #     ),
+    #     periods=1,
+    #     video_path=Path('sum_of_harmonics.mp4'),
+    #     label='',
+    #     frames_per_period=400,
+    # )
+    
+    # rng = np.random.default_rng(seed=1)
+
+    # y_random = np.concatenate((
+    #     [0],
+    #     np.convolve(
+    #         rng.normal(size=2**7-1),
+    #         stats.norm.pdf(np.linspace(-3, 3, num=2**7-1)), 
+    #         mode='same'
+    #     ), 
+    #     [0],
+    # ))
+    # y_random /= y_random.max()
+
+    # non_linear_system(
+    #     y_random,
+    #     periods=1.,
+    #     video_path=Path('random_y0.mp4'),
+    #     label=', random initial conditions',
+    #     frames_per_period=400,
+    # )
+    
+    # y_random = np.concatenate((
+    #     [0],
+    #     stats.norm.pdf(np.linspace(-3, 2, num=2**6-1)),
+    #     [0],
+    # ))
+
+    # non_linear_system(
+    #     y_random,
+    #     periods=1.,
+    #     video_path=Path('gaussian_y0.mp4'),
+    #     label=', gaussian initial conditions',
+    #     frames_per_period=400,
+    # )
+    
+    # non_linear_system(
+    #     np.sin(np.pi*np.linspace(0, 1, 2**5+1)),
+    #     periods=40,
+    #     alpha=1,
+    #     video_path=Path('alpha_1.mp4'),
+    #     label=', $\\alpha=1$',
+    # )
+    # non_linear_system(
+    #     np.sin(np.pi*np.linspace(0, 1, 2**5+1)),
+    #     periods=40,
+    #     beta=2,
+    #     video_path=Path('beta_2.mp4'),
+    #     label=', $\\beta=2$',
+    # )
