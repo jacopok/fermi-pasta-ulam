@@ -122,6 +122,43 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 $$
 
 Each mode is evolving independently! 
+
+```{python}
+#| echo: false
+
+import matplotlib.pyplot as plt
+from project_scripts.simulations import non_linear_system
+from pathlib import Path
+import numpy as np
+
+fname = Path('gaussian_y0.mp4')
+
+if not fname.exists():
+    y0 = np.concatenate((
+        [0],
+        stats.norm.pdf(np.linspace(-3, 2, num=2**6-1)),
+        [0],
+    ))
+
+    non_linear_system(
+        y0,
+        periods=1.,
+        video_path=Path('gaussian_y0.mp4'),
+        label=', gaussian initial conditions',
+        frames_per_period=400,
+    )
+
+    plt.close()
+```
+
+::: {.content-visible when-format="html"}
+
+![Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).](gaussian_y0.mp4)
+
+:::
+
+
+
 But now, let us add some new bits to the Hamiltonian:
 
 $$
