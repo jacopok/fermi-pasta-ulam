@@ -167,6 +167,8 @@
 <link href="site_libs/bootstrap/bootstrap-2b99e3ea126fff8e7347a660e98bfe82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-4379a32cd0f6f37ba367e6b678381507.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-2b99e3ea126fff8e7347a660e98bfe82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -396,10 +398,10 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">        
 
-     <div id="25dc4bc9" class="cell markdown">
+     <div id="094f3d9e" class="cell markdown">
 
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="f98d2ad4" class="cell" data-execution_count="1">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="082cb14f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -421,19 +423,19 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="944fb7f8" class="cell markdown">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="alpha_5.mp4" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Animation of the nonlinear oscillating string we will model."><video src="alpha_5.mp4" class="img-fluid" controls=""></video></a><a href="alpha_5.mp4">Animation of the nonlinear oscillating string we will model.</a></p>
-<figcaption>Animation of the nonlinear oscillating string we will model.</figcaption>
-</figure>
-</div>
+<div id="86960696" class="cell markdown">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="alpha_5.mp4"></video></div>
+<p>Animation of the nonlinear oscillating string we will model.</p>
 <section id="motivation-and-history" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-and-history">Motivation and history</h2>
-<p>To write. Mention “the footnote” about Mary Tsingou.</p>
+<p>The Fermi-Pasta-Ulam-Tsingou problem holds an important place in the history of computational physics: it was first time a computer simulation was used to obtain novel, interesting results about fundamental physics.</p>
+<p>From the evolution of a seemingly simple setup, a chain of oscillating masses connected by non-linear springs, unexpected behaviour emerges.</p>
+<p>This problem was studied in a 1953 paper, authored by Enrico Fermi, John Pasta and Stanislaw Ulam. The paper included numerical simulations, performed by Mary Tsingou who, instead of being credited as an author, was simply <a href="https://web.archive.org/web/20240929141604/https://discover.lanl.gov/publications/national-security-science/2020-winter/we-thank-miss-mary-tsingou/">mentioned in a footnote</a>.</p>
 </section>
-<section id="linear-problem-description" class="level2">
-<h2 class="anchored" data-anchor-id="linear-problem-description">Linear problem description</h2>
+<section id="linear-problem" class="level2">
+<h2 class="anchored" data-anchor-id="linear-problem">Linear problem</h2>
+<section id="description-and-ode-approach" class="level3">
+<h3 class="anchored" data-anchor-id="description-and-ode-approach">Description and ODE approach</h3>
 <p>Consider a horizontal chain of masses connected by springs. Each of them can oscillate in the vertical direction. We will use “horizontal” and “vertical” for clarity, but we are neglecting gravity here.</p>
 <p>Hooke’s law tells us that force is related to displacement through <span class="math inline">\(\vec{F} = -k \vec{x}\)</span>; for the <span class="math inline">\(i\)</span>-th mass, the horizontal component of this force will always be balanced (since the horizontal distance to its neighboring masses is fixed).</p>
 <p>We can parameterize these masses through their vertical coordinates; the <span class="math inline">\(i\)</span>-th mass will be subject to a force</p>
@@ -443,59 +445,94 @@
 <p>meaning that its acceleration, through <span class="math inline">\(F = m a\)</span>, will be</p>
 <p><span class="math display">\[ \ddot{x}_i = \frac{k}{m} ( x_{i-1} + x_{i+1} - 2 x_i )\,.
 \]</span></p>
+<div id="nte-title" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1: Physical constants
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From here onward, we will set <span class="math inline">\(k/m = 1\)</span> and forget about these constants. Equivalently, we can work with a rescaled temporal coordinate</p>
+<p><span class="math display">\[ \tilde{t} = t \sqrt{ \frac{m}{k}}\,.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="nte-title" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;2: Mass indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We consider a system of <span class="math inline">\(N+1\)</span> masses, indexed from <span class="math inline">\(0\)</span> to <span class="math inline">\(N\)</span>, such that masses <span class="math inline">\(0\)</span> and <span class="math inline">\(N\)</span> are kept fixed.</p>
-<p>We expect wave-like solutions by the look of the equation. Since we need to fix the boundaries to 0, a sensible family to consider is</p>
-<p><span class="math display">\[ x_i^{(n)}(t) = Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
+<p>This means we have <span class="math inline">\(N\)</span> springs, and the factor <span class="math inline">\(N\)</span> will be used often. Note that other references may say that <span class="math inline">\(N\)</span> is the number of masses.</p>
+</div>
+</div>
+</div>
+<p>We expect wave-like solutions. Since we need to fix the boundaries to 0, a sensible ansatz is</p>
+<p><span class="math display">\[ x_i(t) = \sum_{n=1}^{N-1} Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
 \]</span></p>
 <p>Are these indeed solutions? Plugging them into our ODE we get</p>
-<p><span class="math display">\[ \frac{\text{d}^2}{\text{d}t^2} x_i^{(n)}(t) = \ddot{Q}_n(t) \sin\left( \frac{\pi i n}{N}\right) = (*)\,.
+<p><span class="math display">\[ \frac{\text{d}^2}{\text{d}t^2} x_i(t) = \sum_{n=1}^{N-1} \ddot{Q}_n(t) \sin\left( \frac{\pi i n}{N}\right) = (*)\,.
 \]</span></p>
 <p>On the other side, we have</p>
-<p><span class="math display">\[ (*) = Q_n(t) \left[ \sin\left( \frac{\pi (i+1) n}{N}\right) + \sin\left( \frac{\pi (i-1) n}{N}\right) - 2 \sin\left( \frac{\pi i n}{N}\right) \right]\,.
+<p><span class="math display">\[ (*) = \sum_{n=1}^{N-1} Q_n(t) \left[ \sin\left( \frac{\pi (i+1) n}{N}\right) + \sin\left( \frac{\pi (i-1) n}{N}\right) - 2 \sin\left( \frac{\pi i n}{N}\right) \right]\,.
 \]</span></p>
 <p>Let us introduce the notation <span class="math inline">\(s_{x} = \sin ( \pi x / N)\)</span> and <span class="math inline">\(c_{x} = \cos ( \pi x / N)\)</span>, which will simplify the next step. We can use the sine addition identity to write</p>
-<p><span class="math display">\[ \sin\left( \frac{\pi (i+1) n}{N}\right)
+<p><span class="math display">\[ \sin\left( \frac{\pi (i \pm 1) n}{N}\right)
 = s_{in} c_n \pm c_{in} s_n\,.
 \]</span></p>
 <p>Then, the RHS will equal</p>
 <p><span class="math display">\[
-(*) =
+\begin{align}
+(*) &amp;= \sum_{n=1}^{N-1}
 Q_n(t) \left[
     s_{in} c_n + c_{in} s_n
     +
     s_{in} c_n - c_{in} s_n
     - 2 s_{in}
-\right] = Q_n(t) s_{in} (2c_n - 2)\,.
+\right] \\
+&amp;= \sum_{n=1}^{N-1} Q_n(t) s_{in} (2c_n - 2)\,.
+\end{align}
 \]</span></p>
 <p>and through another trigonometric identity we can get to</p>
 <p><span class="math display">\[ 2 c_n - 2 = 2 (\cos \left( \frac{\pi n}{N}\right) - 1) = - 4 \sin^2 \left( \frac{\pi n}{2N}\right)\,.
 \]</span></p>
 <p>Then, if we denote <span class="math inline">\(\omega_n = 2 \sin (\pi n / 2N)\)</span>, we get to the expression</p>
 <p><span class="math display">\[ \sum_{n=1}^{N-1} \ddot{Q}_n (t) \sin\left( \frac{\pi i n}{N}\right) = -\sum_{n=1}^{N-1} \omega_n^2 Q_n(t) \sin\left( \frac{\pi i n}{N}\right)\,.
-\]</span> Alternatively, we can write this as</p>
-<p><span class="math display">\[ \sum_{n=1}^{N-1} \left[ \ddot{Q}_n (t) + \omega_n^2 Q_n(t)  \right] \sin\left( \frac{\pi i n}{N}\right) = 0\,.
 \]</span></p>
-<p>This should hold for all <span class="math inline">\(i = 1\dots N-1\)</span>. We can interpret this as a matrix equation: <span class="math inline">\(\sum_{n} U_{in}f_{n}=0\)</span>, where <span class="math inline">\(U_{in} = \sin(\pi i n / N)\)</span> while <span class="math inline">\(f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)\)</span>. The matrix <span class="math inline">\(U\)</span> is invertible (check!), therefore the only solution to this system of equations is <span class="math inline">\(f_{n}=0\)</span> for all <span class="math inline">\(n\)</span>.</p>
+<p>Grouping the terms, we can write this as</p>
+<p><span class="math display">\[ \sum_{n=1}^{N-1} \sin\left( \frac{\pi i n}{N}\right) \left[ \ddot{Q}_n (t) + \omega_n^2 Q_n(t) \right]  = 0\,.
+\]</span></p>
+<p>This should hold for all <span class="math inline">\(i = 0\dots N\)</span> (for <span class="math inline">\(i=0\)</span> and <span class="math inline">\(i=N\)</span> those equations are trivial since we always have <span class="math inline">\(x_i=x_N=0\)</span>). We can interpret this as a matrix equation: <span class="math inline">\(\sum_{n=1}^{N-1} U_{in}f_{n}=0\)</span>, where <span class="math inline">\(U_{in} = \sin(\pi i n / N)\)</span> while <span class="math inline">\(f_{n} = \ddot{Q}_n (t) + \omega_n^2 Q_n(t)\)</span>. The matrix <span class="math inline">\(U\)</span> is invertible (check!), therefore the only solution to this system of equations is <span class="math inline">\(f_{n}=0\)</span> for all <span class="math inline">\(n\)</span>.</p>
 </section>
-<section id="hamiltonian-and-matrix-approach" class="level2">
-<h2 class="anchored" data-anchor-id="hamiltonian-and-matrix-approach">Hamiltonian and matrix approach</h2>
+<section id="hamiltonian-and-matrix-approach" class="level3">
+<h3 class="anchored" data-anchor-id="hamiltonian-and-matrix-approach">Hamiltonian and matrix approach</h3>
 <p>An alternative approach is the Hamiltonian one. We can write down the Hamiltonian of the problem in terms of the momenta <span class="math inline">\(p_{i} = \dot{x}_{i}\)</span> and coordinates <span class="math inline">\(q_{i} = x_{i}\)</span>: <span class="math display">\[
 H = \frac{1}{2} \sum_{i=1}^{N-1} p_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} (x_{i} - x_{i-1})^{2}
-\]</span> We recover Hamilton’s equations as before:</p>
+\]</span></p>
+<p>The equations of motion naturally appear from Hamilton’s equations:</p>
 <p><span class="math display">\[
 \begin{align}
 -\frac{\partial H}{\partial x_{i}} &amp;= -( x_{i}- x_{i-1} ) - (x_{i}-x_{i+1}) = x_{i-1} +x_{i+1} - 2 x_{i}  \\
-\frac{\partial H}{\partial \dot{x}_{i}} &amp;= \dot{x}_{i}
+\frac{\partial H}{\partial p_{i}} &amp;= \dot{x}_{i}\,.
 \end{align}
 \]</span></p>
-<p>In normal coordinates, the Hamiltonian reads:</p>
-<p><span class="math display">\[
-H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1}  \omega _{k}^{2}Q_{k}^{2} = \sum_{k=1}^{N-1} E_{k}
-\]</span></p>
-<p>Each mode is evolving independently!</p>
+</section>
 </section>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="985c89a9" class="cell" data-execution_count="2">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="87c419fd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -509,7 +546,7 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> fname.exists():</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    y0 <span class="op">=</span> np.concatenate((</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        stats.norm.pdf(np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">2</span>, num<span class="op">=</span><span class="dv">2</span><span class="op">**</span><span class="dv">5</span><span class="op">-</span><span class="dv">1</span>)),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        stats.norm.pdf(np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">2</span>, num<span class="op">=</span><span class="dv">2</span><span class="op">**</span><span class="dv">4</span><span class="op">-</span><span class="dv">1</span>)),</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ))</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
@@ -524,7 +561,7 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="154d6fdf" class="cell" data-execution_count="3">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="26376d0a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -545,32 +582,48 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>V[i[:<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, i[:<span class="op">-</span><span class="dv">1</span>]] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="12431be1" class="cell markdown">
+<div id="ebfedd6d" class="cell markdown">
 <p>We can write the problem in matrix terms: the Hamiltonian will be <span class="math display">\[
-H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x
+H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x\,,
 \]</span></p>
+<p>where <span class="math inline">\(V\)</span> is a matrix with the following entries:</p>
+<ul>
+<li><span class="math inline">\(2\)</span> along the central diagonal, except for <span class="math inline">\(V_{00} = V_{NN} = 1\)</span>;</li>
+<li><span class="math inline">\(-1\)</span> on the two diagonals near the central one.</li>
+</ul>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="17794c39" class="cell" data-execution_count="4">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="9fe5ad45" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Source code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(V, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Potential $V$'</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> mpl.cm.viridis</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bounds <span class="op">=</span> [<span class="op">-</span><span class="fl">1.5</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> mpl.colors.BoundaryNorm(bounds, cmap.N, extend<span class="op">=</span><span class="st">'neither'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(V, cmap<span class="op">=</span><span class="st">'viridis'</span>, norm<span class="op">=</span>norm)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Potential $V$'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>cbar.set_ticks(np.arange(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="manuscript_files/figure-html/cell-5-output-1.png" width="361" height="283" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="manuscript_files/figure-html/cell-5-output-1.png" width="348" height="283" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="291eef1e" class="cell markdown">
-<p>which we can transform, making use of the matrix <span class="math inline">\(U\)</span>, whose entries are given by <span class="math display">\[
-U_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
-\]</span> <span class="math inline">\(U\)</span> is a symmetric, invertible matrix, and it is its own inverse: <span class="math inline">\(UU = I_{N}\)</span>. We can show that <span class="math inline">\(U^{T} V U = \Omega\)</span>, where <span class="math inline">\(\Omega\)</span> is a diagonal matrix.</p>
+<div id="51701791" class="cell markdown">
+<p>We can diagonalize this potential making use of the matrix <span class="math inline">\(O\)</span>, whose entries are given by <span class="math display">\[
+O_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
+\]</span></p>
+<p><span class="math inline">\(U\)</span> is a symmetric, invertible matrix, and it is its own inverse: <span class="math inline">\(OO = I_{N}\)</span>. The normalization <span class="math inline">\(\sqrt{2/N}\)</span> is necessary in order to achieve this.</p>
+<p>A note of caution: the statement about invertibility is only true when restricting the matrix to its central submatrix, with indices <span class="math inline">\(1 \leq n, m &lt; N\)</span>, since the outer “cornice” of the matrix is identically zero, meaning that its rank is actually <span class="math inline">\(N-1\)</span>.</p>
+<p>This transformation is called the <strong>Discrete Sine Transform</strong>, it is a real-valued variant of the Fourier transform.</p>
+<p>We can show that <span class="math inline">\(O^{T} V O = \Omega\)</span>, where <span class="math inline">\(\Omega\)</span> is a diagonal matrix.</p>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="893db305" class="cell" data-execution_count="5">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="7c3aae50" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U, cmap<span class="op">=</span><span class="st">'seismic'</span>)</span>
@@ -580,54 +633,94 @@ U_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="f3abb5f0" class="cell" data-execution_count="6">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="45cdd136" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Source code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U<span class="op">@</span>V<span class="op">@</span>U, cmap<span class="op">=</span><span class="st">'seismic'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagonalized potential $UVU$'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U<span class="op">@</span>V<span class="op">@</span>U, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagonalized potential $O^{</span><span class="ch">\\</span><span class="st">top}VO$'</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="284" class="figure-img"></a></p>
+<p class=""><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="286" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="8123e242" class="cell markdown">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="gaussian_y0.mp4" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!)."><video src="gaussian_y0.mp4" class="img-fluid" controls=""></video></a><a href="gaussian_y0.mp4">Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</a></p>
-<figcaption>Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</figcaption>
-</figure>
-</div>
+<div id="01d54328" class="cell markdown">
+<p>Specifically, one finds that the entries on the diagonal of <span class="math inline">\(\Omega\)</span> are exactly the square angular frequencies from before:</p>
+<p><span class="math display">\[ \Omega_{nn} = \omega_n^2 = 4 \sin^2 \left( \frac{\pi n}{ 2N} \right) \,.
+\]</span></p>
+<p>The coordinates <span class="math inline">\(Q\)</span> can be written as <span class="math inline">\(Q = O x\)</span>, and they are called <strong>normal</strong> coordinates. Since <span class="math inline">\(O\)</span> is time-independent, we also have <span class="math inline">\(\dot{Q} = O \dot{x}\)</span>. Since <span class="math inline">\(O\)</span> is also its own inverse, we also have <span class="math inline">\(x = O Q\)</span> and <span class="math inline">\(\dot{x} = O \dot{Q}\)</span>.</p>
+<p>In terms of these new coordinates, the Hamiltonian reads:</p>
+<p><span class="math display">\[
+H = \frac{1}{2} \sum_{n=1}^{N-1} \left[ \dot{Q}_{n}^{2} +\omega _{n}^{2}Q_{n}^{2} \right]\,,
+\]</span></p>
+<p>and it is natural to now consider the positions as <span class="math inline">\(q_n = Q_n\)</span> and the momenta as <span class="math inline">\(p_n = \dot{Q}_n\)</span>. From this formulation, it is clear that each mode is evolving independently; not only is the <em>global</em> energy <span class="math inline">\(H\)</span> conserved, but also each of its components</p>
+<p><span class="math display">\[ E_n = \frac{1}{2}  \left[\dot{Q}_n^2 + \omega _{n}^{2}Q_{n}^{2} \right]
+\]</span></p>
+<p>is constant through the evolution. However, since each of the modes evolves with a different frequency, their relative phases will change, leading to a different shape for the <span class="math inline">\(x_i\)</span>.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="gaussian_y0.mp4"></video></div>
+<p>Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</p>
 <section id="non-linear-problem" class="level2">
 <h2 class="anchored" data-anchor-id="non-linear-problem">Non-linear problem</h2>
-<p>Now, let us add some nonlinear terms to the Hamiltonian:</p>
+<p>The linear problem is essentially solved. What is interesting is to see how it changes when we introduce some nonlinearity; specifically, we will make each spring react in a non-linear way,</p>
 <p><span class="math display">\[
-H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \left[  (x_{i} - x_{i-1})^{2} + \frac{\alpha}{3}(x_{i}-x_{i-1})^{3} + \frac{\beta}{4} (x_{i}-x_{i-1})^{4}  \right]
+H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \left[  (x_{i} - x_{i-1})^{2} + \frac{\alpha}{3}(x_{i}-x_{i-1})^{3} + \frac{\beta}{4} (x_{i}-x_{i-1})^{4}  \right]\,.
 \]</span></p>
-<p>The equations of motion now become <span class="math display">\[
-\ddot{x}_{i} = x_{i-1} +x_{i+1} - 2 x_{i} + \alpha \left[ (x_{i+1}-x_{i})^{2} - (x_{i}-x_{i-1})^{2} \right] + \beta \left[ (x_{i+1}-x_{i})^{3} - (x_{i}-x_{i-1})^{3} \right]
-\]</span></p>
-<p>To add:</p>
-<ul>
-<li>normal mode description breakdown</li>
-<li>thermalization expectation</li>
-<li>approximate relation for the recurrence time</li>
-</ul>
-<p>Useful resources:</p>
-<ul>
-<li>https://arxiv.org/pdf/nlin/0501053</li>
-<li>https://pubs.aip.org/aip/cha/article/15/1/015104/322124/The-Fermi-Pasta-Ulam-problem-Fifty-years-of</li>
-</ul>
 </section>
+</div>
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="70bec17c" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Source code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, num<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, <span class="op">-</span>x, label<span class="op">=</span><span class="st">'linear'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, <span class="op">-</span> x <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'$</span><span class="ch">\\</span><span class="st">alpha = 0.5$'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x, <span class="op">-</span> x <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'$</span><span class="ch">\\</span><span class="st">beta = 0.5$'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Displacement $x$'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Force $F$'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>])</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.yticks([<span class="dv">0</span>])</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.grid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="">
+<figure class="figure">
+<p class=""><a href="manuscript_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="manuscript_files/figure-html/cell-8-output-1.png" width="502" height="284" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<div id="cac1d15c" class="cell markdown">
+<p>The equations of motion now become <span class="math display">\[
+\ddot{x}_{i} = x_{i-1} +x_{i+1} - 2 x_{i} + \alpha \left[ (x_{i+1}-x_{i})^{2} - (x_{i}-x_{i-1})^{2} \right] + \beta \left[ (x_{i+1}-x_{i})^{3} - (x_{i}-x_{i-1})^{3} \right] \,.
+\]</span></p>
+<p>Now, the coordinates <span class="math inline">\(Q\)</span> are not of particular help in <em>solving</em> the problem: the Hamiltonian written in terms of them remains heavily coupled; for example, including only the <span class="math inline">\(\alpha\)</span> contribution, we have</p>
+<p><span class="math display">\[
+H = \frac{1}{2} \sum_{n=1}^{N-1} \left[\dot{Q}_{n}^{2} + \omega_n^2 Q_n^2\right] + \frac{\alpha}{3}
+\sum{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
+\]</span></p>
+<p>for some coeffficients <span class="math inline">\(c_{klm}\)</span> which we do not need to actually compute. This is not any easier to solve than the version written in terms of <span class="math inline">\(x\)</span>; in fact, solving the equation in <span class="math inline">\(x\)</span> is preferrable.</p>
+<p>Nevertheless, understanding the linear problem is helpful when looking at the evolution of the nonlinear one. We can still perform the transformation <span class="math inline">\(Q (t) = Ox(t)\)</span>, and compute the energy in each eigenmode of the linear problem, <span class="math inline">\(E_n(t)\)</span>. We do not expect these to be constant as a function of time. The physicists in the 1953 paper expected to observe some kind of thermalization, <em>i.e.</em> the energies contained in each mode would approach a stable configuration with each mode having roughly equal energy.</p>
+<p>Insted, they observed an interesting recurrence behaviour! After a long time, almost all the energy appeared to return to the fundental <span class="math inline">\(n=1\)</span> mode.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figure_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure 1 from the 1953 FPUT paper."><img src="figure_1.png" class="img-fluid figure-img" alt="Figure 1 from the 1953 FPUT paper."></a></p>
+<figcaption>Figure 1 from the 1953 FPUT paper.</figcaption>
+</figure>
+</div>
+<p>A lot of theoretical progress has been made since then, and the recurrence time can be <a href="https://arxiv.org/pdf/nlin/0501053">analytically estimated</a> as</p>
+<p><span class="math display">\[ T_R = \frac{3}{\pi^{3/2} \sqrt{2}} \frac{N^{3/2}}{\sqrt{A \alpha}} T_1\,,
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the number of springs, <span class="math inline">\(A\)</span> is the initial amplitude of the fundamental mode’s oscillation, while <span class="math inline">\(T_1 = 2\pi / \omega_1\)</span> is the period of the fundamental oscillation.</p>
 </div>
      </main>
 <!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,7 +1135,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
       }
     }
   });
-  </script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+  </script>  </div> <!-- /content -->  <script>videojs(video_shortcode_videojs_video1);</script>  <script>videojs(video_shortcode_videojs_video2);</script>  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
