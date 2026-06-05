@@ -279,6 +279,23 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 
 Each mode is evolving independently!
 
+We can write the problem in matrix terms: the Hamiltonian will be \[
+H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/cell-5-output-1.pdf}}
+
+which we can transform, making use of the matrix \(U\), whose entries
+are given by \[
+U_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
+\] \(U\) is a symmetric, invertible matrix, and it is its own inverse:
+\(UU = I_{N}\). We can show that \(U^{T} V U = \Omega\), where
+\(\Omega\) is a diagonal matrix.
+
+\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/cell-6-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/cell-7-output-1.pdf}}
+
 \subsection{Non-linear problem}\label{non-linear-problem}
 
 Now, let us add some nonlinear terms to the Hamiltonian:

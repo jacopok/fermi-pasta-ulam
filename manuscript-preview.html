@@ -396,10 +396,10 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">        
 
-     <div id="e49f8c91" class="cell markdown">
+     <div id="25dc4bc9" class="cell markdown">
 
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="1265d85a" class="cell" data-execution_count="1">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="f98d2ad4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -421,7 +421,7 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="b2bb64c3" class="cell markdown">
+<div id="944fb7f8" class="cell markdown">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="alpha_5.mp4" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Animation of the nonlinear oscillating string we will model."><video src="alpha_5.mp4" class="img-fluid" controls=""></video></a><a href="alpha_5.mp4">Animation of the nonlinear oscillating string we will model.</a></p>
@@ -495,7 +495,7 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 <p>Each mode is evolving independently!</p>
 </section>
 </div>
-<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="13c2525b" class="cell" data-execution_count="2">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="985c89a9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Source code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -524,10 +524,86 @@ H = \frac{1}{2} \sum_{k=1}^{N-1} \dot{Q}_{k}^{2} + \frac{1}{2} \sum_{k=1}^{N-1} 
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div></div>
-<div id="8d7d0e1c" class="cell markdown">
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="154d6fdf" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Source code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.arange(N<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>j <span class="op">=</span> np.arange(N<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> np.sqrt(<span class="dv">2</span><span class="op">/</span>N) <span class="op">*</span> np.sin(i[:, np.newaxis] <span class="op">*</span> j[np.newaxis, :] <span class="op">*</span> np.pi <span class="op">/</span> N)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.zeros((N<span class="op">+</span><span class="dv">1</span>, N<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>V[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>V[N, N] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>V[i[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>], i[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>]] <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>V[i[<span class="dv">1</span>:]<span class="op">-</span><span class="dv">1</span>, i[<span class="dv">1</span>:]] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>V[i[:<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, i[:<span class="op">-</span><span class="dv">1</span>]] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div></div>
+<div id="12431be1" class="cell markdown">
+<p>We can write the problem in matrix terms: the Hamiltonian will be <span class="math display">\[
+H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x
+\]</span></p>
+</div>
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="17794c39" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Source code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(V, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Potential $V$'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="">
+<figure class="figure">
+<p class=""><a href="manuscript_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="manuscript_files/figure-html/cell-5-output-1.png" width="361" height="283" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<div id="291eef1e" class="cell markdown">
+<p>which we can transform, making use of the matrix <span class="math inline">\(U\)</span>, whose entries are given by <span class="math display">\[
+U_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
+\]</span> <span class="math inline">\(U\)</span> is a symmetric, invertible matrix, and it is its own inverse: <span class="math inline">\(UU = I_{N}\)</span>. We can show that <span class="math inline">\(U^{T} V U = \Omega\)</span>, where <span class="math inline">\(\Omega\)</span> is a diagonal matrix.</p>
+</div>
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="893db305" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Source code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U, cmap<span class="op">=</span><span class="st">'seismic'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fourier matrix $U$'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="">
+<figure class="figure">
+<p class=""><a href="manuscript_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="manuscript_files/figure-html/cell-6-output-1.png" width="361" height="283" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container code-fold"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="f3abb5f0" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Source code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(U<span class="op">@</span>V<span class="op">@</span>U, cmap<span class="op">=</span><span class="st">'seismic'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagonalized potential $UVU$'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Matrix entry'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="">
+<figure class="figure">
+<p class=""><a href="manuscript_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="manuscript_files/figure-html/cell-7-output-1.png" width="350" height="284" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<div id="8123e242" class="cell markdown">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="gaussian_y0.mp4" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!)."><video src="gaussian_y0.mp4" class="img-fluid" controls=""></video></a><a href="gaussian_y0.mp4">Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</a></p>
+<p><a href="gaussian_y0.mp4" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!)."><video src="gaussian_y0.mp4" class="img-fluid" controls=""></video></a><a href="gaussian_y0.mp4">Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</a></p>
 <figcaption>Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).</figcaption>
 </figure>
 </div>
@@ -551,18 +627,6 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
 <li>https://arxiv.org/pdf/nlin/0501053</li>
 <li>https://pubs.aip.org/aip/cha/article/15/1/015104/322124/The-Fermi-Pasta-Ulam-problem-Fifty-years-of</li>
 </ul>
-<!-- ```{python}
-import numpy as np
-
-N = 5
-
-i = np.arange(N+1)
-j = np.arange(N+1)
-
-U = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * j[np.newaxis, :] * np.pi / N)
-
-print(np.round(U@U))
-``` -->
 </section>
 </div>
      </main>
