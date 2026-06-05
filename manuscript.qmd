@@ -212,6 +212,8 @@ where $V$ is a matrix with the following entries:
 - $-1$ on the two diagonals near the central one.
 
 ```{python}
+#| fig-cap: "Matrix entries for potential _V_ of the problem."
+
 import matplotlib as mpl
 
 cmap = mpl.cm.viridis
@@ -238,12 +240,16 @@ This transformation is called the __Discrete Sine Transform__, it is a real-valu
 We can show that $O^{T} V O = \Omega$, where $\Omega$ is a diagonal matrix.
 
 ```{python}
+#| fig-cap: "Matrix entries for the Discrete Sine Transform _U_."
+
 plt.imshow(U, cmap='seismic')
-plt.title('Fourier matrix $U$')
+plt.title('DST matrix $U$')
 plt.colorbar(label='Matrix entry')
 ```
 
 ```{python}
+#| fig-cap: "Matrix entries for the diagonalized potential."
+ 
 plt.imshow(U@V@U, cmap='viridis')
 plt.title('Diagonalized potential $O^{\\top}VO$')
 plt.colorbar(label='Matrix entry')
@@ -290,6 +296,7 @@ H = \frac{1}{2} \sum_{i=1}^{N-1} \dot{x}_{i}^{2} + \frac{1}{2} \sum_{i=1}^{N} \l
 $$
 
 ```{python}
+#| fig-cap: "Nonlinear spring response."
 
 x = np.linspace(-1, 1, num=1000)
 
@@ -314,7 +321,7 @@ Now, the coordinates $Q$ are not of particular help in _solving_ the problem: th
 
 $$
 H = \frac{1}{2} \sum_{n=1}^{N-1} \left[\dot{Q}_{n}^{2} + \omega_n^2 Q_n^2\right] + \frac{\alpha}{3}
-\sum{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
+\sum_{klm=1}^{N-1} c_{klm} Q_k Q_l Q_m \omega_k \omega_l \omega_m
 $$
 
 for some coeffficients $c_{klm}$ which we do not need to actually compute.
