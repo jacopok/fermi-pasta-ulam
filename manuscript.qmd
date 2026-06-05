@@ -159,6 +159,57 @@ if not fname.exists():
     plt.close()
 ```
 
+
+```{python}
+import numpy as np
+
+N = 32
+
+i = np.arange(N+1)
+j = np.arange(N+1)
+
+U = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * j[np.newaxis, :] * np.pi / N)
+
+V = np.zeros((N+1, N+1))
+
+V[0, 0] = 1
+V[N, N] = 1
+V[i[1:-1], i[1:-1]] = 2
+V[i[1:]-1, i[1:]] = -1
+V[i[:-1]+1, i[:-1]] = -1
+```
+
+We can write the problem in matrix terms: the Hamiltonian will be
+$$
+H = \frac{1}{2} \lvert \dot{x} \rvert ^{2} + \frac{1}{2} x^{T} V x
+$$
+
+
+```{python}
+plt.imshow(V, cmap='viridis')
+plt.title('Potential $V$')
+plt.colorbar(label='Matrix entry')
+```
+
+which we can transform, making use of the matrix $U$, whose entries are given by 
+$$
+U_{nm} = \sqrt{ \frac{2}{N} } \sin\left(  \frac{nm\pi}{N} \right)\,.
+$$
+$U$ is a symmetric, invertible matrix, and it is its own inverse: $UU = I_{N}$.
+We can show that $U^{T} V U = \Omega$, where $\Omega$ is a diagonal matrix.
+
+```{python}
+plt.imshow(U, cmap='seismic')
+plt.title('Fourier matrix $U$')
+plt.colorbar(label='Matrix entry')
+```
+
+```{python}
+plt.imshow(U@V@U, cmap='seismic')
+plt.title('Diagonalized potential $UVU$')
+plt.colorbar(label='Matrix entry')
+```
+
 ::: {.content-visible when-format="html"}
 
 ![Evolution of the linear problem with a Gaussian-like initial condition (not an eigenmode!).](gaussian_y0.mp4)
@@ -190,15 +241,3 @@ Useful resources:
 - https://pubs.aip.org/aip/cha/article/15/1/015104/322124/The-Fermi-Pasta-Ulam-problem-Fifty-years-of
 
 
-<!-- ```{python}
-import numpy as np
-
-N = 5
-
-i = np.arange(N+1)
-j = np.arange(N+1)
-
-U = np.sqrt(2/N) * np.sin(i[:, np.newaxis] * j[np.newaxis, :] * np.pi / N)
-
-print(np.round(U@U))
-``` -->
